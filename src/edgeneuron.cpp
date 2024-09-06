@@ -1,4 +1,4 @@
-#include "edgeneuron.h"
+#include "EdgeNeuron.h"
 
 tflite::AllOpsResolver tflOpsResolver;
 const tflite::Model* tflModel = nullptr;

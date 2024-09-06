@@ -1,5 +1,5 @@
-#ifndef ARDUTFLITE_H
-#define ARDUTFLITE_H
+#ifndef EDGENEURON_H
+#define EDGENEURON_H
 
 #include <Arduino.h>
 #include <Chirale_TensorFlowLite.h>
@@ -29,4 +29,4 @@ bool modelRunInference();
 // Returns the output value or -1 if an error occurred.
 float modelGetOutput(int index);
 
-#endif  // ARDUTFLITE_H
+#endif  // EDGENEURON_H
