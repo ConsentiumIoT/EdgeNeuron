@@ -1,3 +1,14 @@
+/***************************************************
+  This is Consentium's TinyML library
+  ----> https://consentiuminc.online/
+  Check out the links above for our tutorials and product diagrams.
+
+  This Consentium's TinyML library works only for ESP32/Raspberry Pi Pico W compatible Edge boards. 
+  
+  Written by Debjyoti Chowdhury for Consentium.
+  MIT license, all text above must be included in any redistribution
+ ****************************************************/
+
 #include <EdgeNeuron.h>
 #include "model.h"
 
@@ -16,7 +27,8 @@ void setup() {
   Serial.println("Continuous sine function inference example.");
   Serial.println("Initializing TensorFlow Lite Micro Interpreter...");
 
-  if (!modelInit(model, tensor_arena, kTensorArenaSize)) {
+  // Initialize the model
+  if (!initializeModel(model, tensor_arena, kTensorArenaSize)) {
     Serial.println("Model initialization failed!");
     while (true);  // Halt execution on initialization failure
   }
@@ -32,16 +44,16 @@ void loop() {
   }
 
   // Set input value in the model's input tensor
-  modelSetInput(x, 0);
+  setModelInput(x, 0);
 
   // Run the inference
-  if (!modelRunInference()) {
+  if (!runModelInference()) {
     Serial.println("Inference Failed!");
     return;
   }
 
   // Get the predicted output
-  float y_predicted = modelGetOutput(0);
+  float y_predicted = getModelOutput(0);
 
   // Get the actual sine of x
   float y_actual = sin(x);

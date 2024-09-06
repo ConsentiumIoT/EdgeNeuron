@@ -7,7 +7,7 @@ TfLiteTensor* tflInputTensor = nullptr;
 TfLiteTensor* tflOutputTensor = nullptr;
 
 // Function to initialize the model
-bool modelInit(const unsigned char* model, byte* tensorArena, int tensorArenaSize) {
+bool initializeModel(const unsigned char* model, byte* tensorArena, int tensorArenaSize) {
   tflModel = tflite::GetModel(model);
   if (tflModel->version() != TFLITE_SCHEMA_VERSION) {
     Serial.println("Model schema version mismatch!");
@@ -37,7 +37,7 @@ bool modelInit(const unsigned char* model, byte* tensorArena, int tensorArenaSiz
 }
 
 // Function to set input data
-bool modelSetInput(float inputValue, int index) {
+bool setModelInput(float inputValue, int index) {
   if (tflInputTensor == nullptr || index < 0 || index >= tflInputTensor->bytes / sizeof(float)) {
     Serial.println("Input tensor index out of range!");
     return false;
@@ -49,7 +49,7 @@ bool modelSetInput(float inputValue, int index) {
 }
 
 // Function to run inference
-bool modelRunInference() {
+bool runModelInference() {
   if (!tflInterpreter) {
     Serial.println("Interpreter not initialized!");
     return false;
@@ -66,7 +66,7 @@ bool modelRunInference() {
 }
 
 // Function to get output data
-float modelGetOutput(int index) {
+float getModelOutput(int index) {
   if (tflOutputTensor == nullptr || index < 0 || index >= tflOutputTensor->bytes / sizeof(float)) {
     Serial.println("Output tensor index out of range!");
     return -1;
@@ -77,7 +77,7 @@ float modelGetOutput(int index) {
 }
 
 // Optional function to free memory
-void modelCleanup() {
+void cleanupModel() {
   if (tflInterpreter) {
     delete tflInterpreter;
     tflInterpreter = nullptr;
