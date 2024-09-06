@@ -3,10 +3,6 @@
 
 **EdgeNeuron** is an Arduino-friendly wrapper around **TensorFlow Lite Micro**, making it easier to run Tiny Machine Learning (TinyML) models on Arduino boards. It simplifies the process by providing an intuitive, _Arduino-style_ API and avoiding complex C++ constructs like pointers, making it more accessible to those familiar with standard Arduino development.
 
-EdgeNeuron is built on top of the **Chirale_TensorFlowLite** library, a port of TensorFlow Lite Micro for Arduino boards using ARM and ESP32 architectures.
-
-With **EdgeNeuron**, you can experiment with **TinyML** on more capable Arduino boards like the **Arduino Nano 33 BLE**, **Arduino Nano ESP32**, **Arduino Nicla**, **Arduino Portenta**, and **Arduino Giga R1 WiFi**. The library makes it easier for developers to integrate machine learning into their projects without needing extensive knowledge of TensorFlow.
-
 ## Features
 
 - Simplified APIs for running TensorFlow Lite Micro models on Arduino.
@@ -16,8 +12,6 @@ With **EdgeNeuron**, you can experiment with **TinyML** on more capable Arduino 
 ## Installation
 
 You can install **EdgeNeuron** via the Arduino IDE Library Manager or by downloading a `.zip` file from this GitHub repository. 
-
-> **Note:** This library depends on the **Chirale_TensorFlowLite** library. Make sure to install it as well.
 
 ## Usage Examples
 
