@@ -1,6 +1,6 @@
 /***************************************************
   This is Consentium's TinyML library
-  ----> https://consentiuminc.online/
+  ----> https://docs.consentiuminc.online/
   Check out the links above for our tutorials and product diagrams.
 
   This Consentium's TinyML library works only for ESP32/Raspberry Pi Pico W compatible Edge boards. 
