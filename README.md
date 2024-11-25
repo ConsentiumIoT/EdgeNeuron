@@ -1,63 +1,147 @@
-# EdgeNeuron
-## TensorFlow Lite Micro Library in Arduino Style
+# **EdgeNeuron**
+### **TensorFlow Lite Micro Library in Arduino Style**
 
-**EdgeNeuron** is an Arduino-friendly wrapper around **TensorFlow Lite Micro**, making it easier to run Tiny Machine Learning (TinyML) models on Arduino boards. It simplifies the process by providing an intuitive, _Arduino-style_ API and avoiding complex C++ constructs like pointers, making it more accessible to those familiar with standard Arduino development.
-
-## Features
-
-- Simplified APIs for running TensorFlow Lite Micro models on Arduino.
-- Avoids complex C++ constructs (like raw pointers) to ensure easy use in Arduino sketches.
-- Built for TinyML experimentation on powerful Arduino boards.
-
-## Installation
-
-You can install **EdgeNeuron** via the Arduino IDE Library Manager or by downloading a `.zip` file from this GitHub repository. 
-
-## Usage Examples
-
-The examples provided with **EdgeNeuron** demonstrate how to run pre-trained machine learning models on Arduino. Each example includes the required model files.
-
-### General TinyML Development Process:
-
-1. **Create an Arduino Sketch to Collect Data:** Use an Arduino board to collect the data needed for training your model.
-2. **Define a Neural Network Model:** In an external TensorFlow development environment (e.g., Google Colaboratory), define and create your deep neural network (DNN) model.
-3. **Train the Model:** Train the model on the collected dataset in the TensorFlow environment.
-4. **Convert and Save the Model:** After training, convert the model to TensorFlow Lite format. Save the model as a `.h` file containing a static byte array of the model.
-5. **Prepare a New Arduino Sketch for Inference:** Write a new Arduino sketch that uses the trained model for inference.
-6. **Include Necessary Headers:** In the sketch, include `EdgeNeuron.h` and your model header file (`model.h`).
-7. **Define the Tensor Arena:** Declare a byte array to serve as a memory buffer (tensor arena) for the model's operations.
-8. **Initialize the Model:** Use the `modelInit()` function to load the model and allocate tensors.
-9. **Set Input Data:** Insert input data into the model using the `modelSetInput()` function.
-10. **Run Inference:** Call `modelRunInference()` to perform inference.
-11. **Read Output Data:** Retrieve the output data using `modelGetOutput()`.
-
-## Reference
-
-### Functions
-
-#### `bool modelInit(const unsigned char* model, byte* tensorArena, int tensorArenaSize)`
-
-- Initializes the TensorFlow Lite Micro environment, sets up the model, resolves operations, and allocates memory for input and output tensors.
-- **Returns:** `true` on success, `false` on failure.
-
-#### `bool modelSetInput(float inputValue, int index)`
-
-- Sets the value at a specific index in the input tensor.
-- **Returns:** `true` on success, `false` if the index is out of range or an error occurs.
-
-#### `bool modelRunInference()`
-
-- Executes the inference operation by invoking the TensorFlow Lite Micro interpreter.
-- **Returns:** `true` on success, `false` if the inference fails.
-
-#### `float modelGetOutput(int index)`
-
-- Retrieves the output value from the specified index in the output tensor.
-- **Returns:** The output value, or `-1` if the index is out of range or an error occurs.
+**EdgeNeuron** is an Arduino-friendly wrapper around **TensorFlow Lite Micro**, simplifying the process of running Tiny Machine Learning (TinyML) models on Arduino boards. It provides a beginner-friendly, _Arduino-style_ API, eliminating the need for complex C++ constructs like raw pointers, making it accessible to developers familiar with standard Arduino programming.
 
 ---
 
-### Future Work
+## **Features**
+- **Intuitive API:** Simplified functions for deploying TensorFlow Lite Micro models on Arduino-compatible boards.
+- **No Raw Pointers:** Designed to avoid complex C++ constructs, enabling easy integration into Arduino sketches.
+- **Optimized for TinyML:** Tailored for experimentation and development on boards with sufficient computational power.
 
-- Additional support for more advanced machine learning models and examples.
-- Enhanced compatibility with other TensorFlow Lite features.
+---
+
+## **Installation**
+
+### **Via Arduino IDE:**
+1. Open the Arduino IDE.
+2. Navigate to **Sketch > Include Library > Manage Libraries**.
+3. Search for `EdgeNeuron` and click **Install**.
+
+### **Manual Installation:**
+1. Download the latest `.zip` file from this GitHub repository.
+2. In the Arduino IDE, navigate to **Sketch > Include Library > Add .ZIP Library**.
+3. Select the downloaded `.zip` file to install the library.
+
+---
+
+## **Usage Examples**
+
+The provided examples demonstrate how to:
+- Deploy pre-trained models for inference.
+- Read data from sensors, preprocess it, and input it into the model.
+- Retrieve and process model outputs.
+
+---
+
+## **TinyML Development Workflow**
+
+1. **Data Collection:**  
+   Use an Arduino sketch to collect sensor data required for training your model.
+
+2. **Model Creation:**  
+   Define and develop a deep neural network (DNN) in a TensorFlow environment (e.g., Google Colaboratory).
+
+3. **Model Training:**  
+   Train the model using the collected dataset in TensorFlow.
+
+4. **Model Conversion:**  
+   Convert the trained model to TensorFlow Lite format and export it as a `.h` file containing a static byte array.
+
+5. **Inference Sketch Preparation:**  
+   Write an Arduino sketch to deploy the trained model for real-time inference.
+
+6. **Include Required Files:**  
+   Add `EdgeNeuron.h` and your model's header file (`model.h`) to your sketch.
+
+7. **Tensor Arena Definition:**  
+   Allocate memory for model operations by declaring a byte array (tensor arena).
+
+8. **Model Initialization:**  
+   Use the `modelInit()` function to load the model and prepare input/output tensors.
+
+9. **Input Data Assignment:**  
+   Populate the input tensor with data using `modelSetInput()`.
+
+10. **Run Inference:**  
+    Perform inference using `modelRunInference()`.
+
+11. **Retrieve Outputs:**  
+    Extract the results using `modelGetOutput()`.
+
+---
+
+## **API Reference**
+
+### **Model Initialization**
+#### `bool modelInit(const unsigned char* model, byte* tensorArena, int tensorArenaSize)`
+Initializes the TensorFlow Lite Micro environment, sets up the model, resolves operations, and allocates memory for tensors.  
+**Returns:**  
+- `true` if successful.  
+- `false` if an error occurs.
+
+---
+
+### **Input Data Assignment**
+#### `bool modelSetInput(float inputValue, int index)`
+Sets the value at a specific index in the input tensor.  
+**Parameters:**  
+- `inputValue`: The input value to be set.  
+- `index`: The index within the input tensor.  
+**Returns:**  
+- `true` if successful.  
+- `false` if the index is invalid or an error occurs.
+
+---
+
+### **Model Inference**
+#### `bool modelRunInference()`
+Executes the inference operation using TensorFlow Lite Micro interpreter.  
+**Returns:**  
+- `true` if successful.  
+- `false` if inference fails.
+
+---
+
+### **Output Retrieval**
+#### `float modelGetOutput(int index)`
+Retrieves the output value at a specified index in the output tensor.  
+**Parameters:**  
+- `index`: The index within the output tensor.  
+**Returns:**  
+- The output value if successful.  
+- `-1` if the index is invalid or an error occurs.
+
+---
+
+## **Future Enhancements**
+- Support for advanced machine learning models (e.g., object detection).
+- Extended compatibility with additional TensorFlow Lite features.
+- Improved optimization for memory-constrained devices.
+
+---
+
+## **Contributing**
+
+We welcome contributions to enhance EdgeNeuron!  
+- Submit bug reports or feature requests via the [GitHub Issues page](https://github.com/consentiumiot/edgeneuron/issues).  
+- Fork the repository, make changes, and submit a pull request.
+
+---
+
+## **License**
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
+
+---
+
+## **Support and Documentation**
+
+Visit [Consentium IoT Documentation](https://docs.consentiumiot.com) for tutorials, examples, and additional resources.  
+For further assistance, email us at [official@consentiumiot.com](mailto:official@consentiumiot.com).
+
+---
+
+### **Badges**
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
