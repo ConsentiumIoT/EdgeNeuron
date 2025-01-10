@@ -7,6 +7,13 @@
 
 using namespace std;
 
-void logData(const char* , vector<double>);
+class EdgeStream{
+    public:
+        EdgeStream();
+        void begin(int baud_rate=9600);
+        void logData(const char* , vector<double>);
+
+};
+
 
 #endif  // EDGESTREAM_H

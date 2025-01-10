@@ -1,6 +1,15 @@
 #include "EdgeStream.h"
 
-void logData(const char* sensor_name, vector<double> sensor_data){
+EdgeStream::EdgeStream() {} // EdgeStream default constructor
+
+void EdgeStream::begin(int baud_rate){
+  // Initialize Serial communication at 9600 baud rate
+  Serial.begin(baud_rate);
+  while (!Serial)
+    continue;  // Wait for the Serial port to be ready
+}
+
+void EdgeStream::logData(const char* sensor_name, vector<double> sensor_data){
   int sensor_num = sensor_data.size();
   JsonDocument doc;
 
