@@ -63,10 +63,8 @@ void setup() {
   Wire.begin();
 
   // Initialize the Grid-EYE sensor
-  if (!grideye.begin()) {
-    Serial.println("[Consentium ERROR] GridEYE sensor initialization failed!");
-    while (true); // Halt execution
-  }
+  grideye.begin();
+  
   Serial.println("[Consentium INFO] GridEYE sensor initialized successfully!");
 
   // Initialize the EdgeNeuron model
