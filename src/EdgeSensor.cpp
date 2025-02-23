@@ -22,13 +22,13 @@ void EdgeSensor::setPins(int sck_pin, int ws_pin, int sd_pin) {
     i2s_set_pin(this->i2s_port, &pin_config);
 }
 
-void EdgeSensor::beginMic(int buff_len, int sampling_freq) {
+void EdgeSensor::beginMic(int buff_len) {
     this->bufferLen = buff_len;
     this->sBuffer = new int16_t[buff_len];  // Allocate buffer dynamically
 
     const i2s_config_t i2s_config = {
         .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),
-        .sample_rate = sampling_freq,
+        .sample_rate = 44100,
         .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
         .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,
         .communication_format = I2S_COMM_FORMAT_I2S,
